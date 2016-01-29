@@ -3,7 +3,7 @@ package Service;
 public class Matriz {
     
     //Método que suma dos matrices cuadradas.  
-    public double[][] suma(double[][] A,double[][] B){
+    public static double[][] suma(double[][] A,double[][] B){
         double [][] suma = new double[A.length][A.length];
         System.out.println("Suma de Dos Matrices:");
     
@@ -19,7 +19,7 @@ public class Matriz {
     public static void  imprimir(double[][] C){
         System.out.println("----------------");
         for (int i = 0; i < C.length; i++) {                        
-            for (int j = 0; j < C.length; j++) {
+            for (int j = 0; j < C[0].length; j++) {
                 System.out.printf(C[i][j]+"\t");  
             }   
                 System.out.println();
@@ -32,22 +32,22 @@ public class Matriz {
     }
     
     //Método que imprime dos matrices cuadradas de misma dimension  
-    public double[][] producto(double[][] A, double[][] B){
-        double[][] producto = new double[A.length][A.length];
+    public static double[][] producto(double[][] A, double[][] B){
+        double[][] C = new double[A.length][B[0].length];
         System.out.println("Multiplicacion de Dos Matrices:");
 
         for (int i = 0; i <A.length; i++) {
-            for (int j = 0; j < A.length; j++) {
-                for (int k = 0; k < A.length; k++) {
-                    producto[i][j] += A[i][k]*B[k][j];
+            for (int j = 0; j < B[0].length; j++) {
+                for (int k = 0; k < A[0].length; k++) {
+                    C[i][j] += A[i][k]*B[k][j];
                 }                
             }            
         }
-        return producto;
+        return C;
     }
     
     // Método que calcula la determinante de una matriz cuadrada (*observado*)    
-    public double determinante(double[][] matriz){
+    public static double determinante(double[][] matriz){
         double det;
         System.out.println("Determinante:");
     if(matriz.length==2)
@@ -82,7 +82,7 @@ public class Matriz {
     }
  
     // Método que Multiplica un numero escalar "n" por una matriz cuadrada 
-    public double[][] producto(double n, double[][] matriz) {
+    public static double[][] producto(double n, double[][] matriz) {
         double[][] producto = new double[matriz.length][matriz.length];
         double multiplicacion=0;
         System.out.println("Multiplicacion escalar ="+n+" y matriz:");
@@ -96,13 +96,13 @@ public class Matriz {
     }
     
     // Método para halla la matriz adjunta
-    public double[][] adjunta(double [][] matriz){
+    public static double[][] adjunta(double [][] matriz){
         System.out.println("Matriz Adjunta:");
         return transpuesta(cofactor(matriz));
     }
     
     //Método para hallar la matriz de cofactores
-    public double[][] cofactor(double[][] matriz){
+    public static double[][] cofactor(double[][] matriz){
         double[][] nuevaMatriz=new double[matriz.length][matriz.length];
         System.out.println("Matriz Cofactor:");
         
@@ -130,11 +130,11 @@ public class Matriz {
     }
     
     //Método que halla la transpuesta de una matriz
-    public double[][] transpuesta(double[][] matriz){
+    public static double[][] transpuesta(double[][] matriz){
         double[][]nuevamatriz=new double[matriz[0].length][matriz.length];
         System.out.println("Transpuesta:");
         
-        for(int i=0; i<matriz.length; i++){
+        for(int i=0; i<matriz[0].length; i++){
             for(int j=0; j<matriz.length; j++){
                 nuevamatriz[i][j]=matriz[j][i];
             }
@@ -143,7 +143,7 @@ public class Matriz {
     }
     
     // Método para hallar inversa de una matriz cuadrada  
-    public double[][] inversa(double[][] matriz) {
+    public static double[][] inversa(double[][] matriz) {
     
         double invDet=1/determinante(matriz);        
         double[][] nuevaMatriz=adjunta(matriz);
